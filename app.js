@@ -68,6 +68,15 @@ bot.dialog('/', [
         session.beginDialog('/preguntarLugar');
     }]);
 
+bot.dialog('/preguntarLugar', [
+    function (session) {
+        builder.Prompts.text(session, '¿Dónde estás?');
+    },
+    function (session, results) {
+        let lugar = results.response;
+        session.endDialog(`Saludos por ${lugar}`);
+    }
+]);
 
 //// Esta función se ejecuta cuando el Intent == ordenarTaxi
 //dialog.matches('Listado de cursos', [
