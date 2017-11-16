@@ -55,7 +55,7 @@ bot.dialog('/', dialog);
 
 dialog.matches('None', [
     function (session, args, next) {
-        builder.Prompts.text(session, '¿Dónde estás?');
+        session.send('¿Dónde estás?');
     }
 ]);
 
