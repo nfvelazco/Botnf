@@ -40,8 +40,8 @@ server.post('/api/messages', connector.listen());
 var bot = new builder.UniversalBot(connector);
 
 
-let luisApp = process.env.LUIS_APP ||'79fa449f-4feb-4051-b2a4-00f5a8ee221f';
-let luisKey = process.env.LUIS_KEY || 'a6e721a8bf894a359da97e8d16c74548';
+//let luisApp = process.env.LUIS_APP ||'79fa449f-4feb-4051-b2a4-00f5a8ee221f';
+//let luisKey = process.env.LUIS_KEY || 'a6e721a8bf894a359da97e8d16c74548';
 
 
 //// Crear un procesador LUIS que apunte a nuestro modelo en el root (/)
