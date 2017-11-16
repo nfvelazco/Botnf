@@ -40,11 +40,9 @@ server.post('/api/messages', connector.listen());
 var bot = new builder.UniversalBot(connector);
 
 
-//let luisApp = process.env.LUIS_APP;
-//let luisKey = process.env.LUIS_KEY;
+let luisApp = process.env.LUIS_APP ||'79fa449f-4feb-4051-b2a4-00f5a8ee221f';
+let luisKey = process.env.LUIS_KEY || 'a6e721a8bf894a359da97e8d16c74548';
 
-let luisApp ='79fa449f-4feb-4051-b2a4-00f5a8ee221f';
-let luisKey = 'a6e721a8bf894a359da97e8d16c74548';
 
 // Crear un procesador LUIS que apunte a nuestro modelo en el root (/)
 var model = process.env.LUIS_MODEL_URL || `https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/${luisApp}?subscription-key=${luisKey}&timezoneOffset=-3.0&verbose=true`;
@@ -58,6 +56,18 @@ dialog.matches('None', [
         session.send('¿Dónde estás?');
     }
 ]);
+
+bot.dialog('/', [
+    function (session) {
+        builder.Prompts.text(session, '¿Cómo te llamas?');
+    },
+    function (session, results) {
+        let msj = results.response;
+        session.send(`Hola ${msj}!`);
+
+        session.beginDialog('/preguntarLugar');
+    }]);
+
 
 // Esta función se ejecuta cuando el Intent == ordenarTaxi
 dialog.matches('Listado de cursos', [
