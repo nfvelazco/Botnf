@@ -47,11 +47,11 @@ let luisApp ='79fa449f-4feb-4051-b2a4-00f5a8ee221f';
 let luisKey = 'a6e721a8bf894a359da97e8d16c74548';
 
 // Crear un procesador LUIS que apunte a nuestro modelo en el root (/)
-var model = `https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/${luisApp}?subscription-key=${luisKey}&timezoneOffset=-3.0&verbose=true`;
+var model = process.env.LUIS_MODEL_URL || `https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/${luisApp}?subscription-key=${luisKey}&timezoneOffset=-3.0&verbose=true`;
 
 var recognizer = new builder.LuisRecognizer(model);
 var dialog = new builder.IntentDialog({ recognizers: [recognizer] });
-bot.dialog('/', dialog);
+
 
 dialog.matches('None', [
     function (session, args, next) {
